@@ -23,7 +23,7 @@ public record Flight(String flightId, String airline, Airport from, Airport to, 
      *    flight D: 0 stop , $  80
      *    produces: flight D, flight B, flight C, flight A
      */
-    public static final Comparator<Flight> bestOrdering = null;
+    public static final Comparator<Flight> bestOrdering = Comparator.comparingInt(Flight::numberOfStops).thenComparingDouble(Flight::unitPrice);
 
     public LocalDate departureDate() {
         return departureAt.atZone(from.timeZone()).toLocalDate();

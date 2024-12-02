@@ -6,6 +6,8 @@ import static eu.isabel.interview.task1.Airport.parisOrly;
 import eu.isabel.interview.task1.Flight;
 import eu.isabel.interview.task1.SearchFlightClient.SearchFlightClientMock;
 import eu.isabel.interview.task1.SearchFlightService.SearchFlightServiceFactory;
+import eu.isabel.interview.task1.SearchFlightServiceImpl;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -25,7 +27,7 @@ public final class App {
         final var client1 = SearchFlightClientMock.init(List.of(flight3, flight1));
         final var client2 = SearchFlightClientMock.init(List.of(flight2, flight4));
 
-        final var service = SearchFlightServiceFactory.fromTwoClients(client1, client2);
+        final var service = SearchFlightServiceImpl.SearchFlightServiceFactoryImpl.fromTwoClients(client1, client2);
         final var result = service.search(parisOrly, londonGatwick, today);
         System.out.println(result);
     }
