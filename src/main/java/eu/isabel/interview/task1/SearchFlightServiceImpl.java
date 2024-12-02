@@ -3,6 +3,7 @@ package eu.isabel.interview.task1;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SearchFlightServiceImpl implements SearchFlightService {
 
@@ -21,7 +22,10 @@ public class SearchFlightServiceImpl implements SearchFlightService {
             results.addAll(client.search(from, to, date));
         }
 
-        return new SearchResult(results);
+        var filteredFlights = results.stream().collect(Collectors.toMap(x-> x.flightId(), x-> x, (flight1, flight2) -> flight1.unitPrice() > flight2.unitPrice() ? flight2 : flight1)).values();
+
+
+        return new SearchResult(filteredFlights.stream().toList());
     }
 
 
